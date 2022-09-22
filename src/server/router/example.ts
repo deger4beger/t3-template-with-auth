@@ -18,4 +18,16 @@ export const exampleRouter = createRouter()
     async resolve({ ctx }) {
       return await ctx.prisma.example.findMany();
     },
-  });
+  })
+  .query("test", {
+    input: z.object({
+      test: z.number()
+    }),
+    async resolve({ input, ctx }) {
+      const data = await ctx.prisma.example.findFirst()
+      return {
+        ...data,
+        test: input.test
+      }
+    }
+  })
