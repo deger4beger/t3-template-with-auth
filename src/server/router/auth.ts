@@ -8,7 +8,7 @@ export const authRouter = createRouter()
         email: z.string().email(),
         password: z.string()
       }),
-    resolve({ input }) {
+    resolve({ input, ctx }) {
 
     },
   })

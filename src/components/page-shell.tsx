@@ -30,7 +30,7 @@ const PageShell = ({
 		      </h1>
 		      <div className="flex">
 			      { routes.map(({ name, route }) =>
-		      		<div className="ml-3 text-sm hover:text-zinc-300 cursor-pointer font-medium flex items-center first:ml-10">
+		      		<div key={ name } className="ml-3 text-sm hover:text-zinc-300 cursor-pointer font-medium flex items-center first:ml-10">
 		      			<Link href={route}>
 		      				{ name }
 		      			</Link>
