@@ -1,4 +1,11 @@
 import Head from "next/head";
+import Link from "next/link";
+
+const routes = [
+	{ name: "Страница учителя", route: "/teacher" },
+	{ name: "Страница студента", route: "/student" },
+	{ name: "Помощь по сайту", route: "/help" }
+]
 
 const PageShell = ({
 	children,
@@ -7,6 +14,7 @@ const PageShell = ({
 	children: React.ReactNode;
 	title: string;
 }) => {
+
 	return (
 		<>
       <Head>
@@ -15,11 +23,20 @@ const PageShell = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav className="bg-zinc-800 p-3 font-medium text-zinc-50 sticky">
-      	<div className="m-auto w-7/12">
-	      	<h1 className="text-lg hover:text-emerald-200 cursor-pointer">
+      <nav className="bg-zinc-800 p-3 text-zinc-50 sticky">
+      	<div className="m-auto w-7/12 flex">
+	      	<h1 className="text-lg hover:text-emerald-200 cursor-pointer font-medium">
 		        Schooller
 		      </h1>
+		      <div className="flex">
+			      { routes.map(({ name, route }) =>
+		      		<div className="ml-3 text-sm hover:text-zinc-300 cursor-pointer font-medium flex items-center first:ml-10">
+		      			<Link href={route}>
+		      				{ name }
+		      			</Link>
+		      		</div>
+			      ) }
+		      </div>
 	      </div>
       </nav>
 
