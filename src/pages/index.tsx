@@ -6,7 +6,7 @@ const Home: NextPage = () => {
 
   return (
     <PageShell title="Home">
-      home page
+
     </PageShell>
   );
 };
