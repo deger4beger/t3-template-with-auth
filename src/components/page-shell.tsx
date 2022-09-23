@@ -23,9 +23,9 @@ const PageShell = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav className="bg-zinc-800 p-3 text-zinc-50 sticky">
+      <nav className="bg-zinc-800 p-3 text-zinc-50">
       	<div className="m-auto w-7/12 flex">
-	      	<h1 className="text-lg cursor-pointer font-medium border-2 px-2 rounded hover:text-emerald-300 hover:border-emerald-300">
+	      	<h1 className="text-lg cursor-pointer font-medium border-2 px-2 rounded hover:text-sky-300 hover:border-sky-300">
 		        Sch⊙ller
 		      </h1>
 		      <div className="flex">

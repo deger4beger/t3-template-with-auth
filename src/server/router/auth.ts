@@ -2,15 +2,13 @@ import { createRouter } from "./context";
 import { z } from "zod";
 
 export const authRouter = createRouter()
-  .query("hello", {
+  .query("getPermission", {
     input: z
       .object({
-        text: z.string().nullish(),
-      })
-      .nullish(),
+        email: z.string().email(),
+        password: z.string()
+      }),
     resolve({ input }) {
-      return {
-        greeting: `Hello ${input?.text ?? "world"}`,
-      };
+
     },
   })
