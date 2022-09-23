@@ -25,7 +25,7 @@ const PageShell = ({
 
       <nav className="bg-zinc-800 p-3 text-zinc-50 sticky">
       	<div className="m-auto w-7/12 flex">
-	      	<h1 className="text-lg cursor-pointer font-medium border-2 px-2 rounded hover:text-emerald-200 hover:border-emerald-200">
+	      	<h1 className="text-lg cursor-pointer font-medium border-2 px-2 rounded hover:text-emerald-300 hover:border-emerald-300">
 		        Sch&#9675;ller
 		      </h1>
 		      <div className="flex">
@@ -45,7 +45,7 @@ const PageShell = ({
       </main>
 
       <footer className="bg-zinc-900 p-3 text-zinc-400 text-sm flex justify-end pr-6">
-      	© 2022 Schooller
+      	© 2022 Scholler
       </footer>
 
     </>
