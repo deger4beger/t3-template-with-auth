@@ -8,10 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "studio": "yarn prisma studio",
-    "migrate": "yarn prisma migrate dev",
-    "push": "yarn prisma db push",
-    "sync": "yarn prisma generate & yarn push"
+    "studio": "prisma studio",
+    "migrate": "prisma migrate dev",
+    "push": "prisma db push",
+    "sync": "yarn postinstall & yarn push"
   },
   "dependencies": {
     "@prisma/client": "^4.3.1",

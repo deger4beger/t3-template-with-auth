@@ -9,6 +9,10 @@ export const authRouter = createRouter()
         password: z.string()
       }),
     resolve({ input, ctx }) {
-
+      return ctx.prisma.user.findUnique({
+        where: {
+          email: input.email
+        }
+      })
     },
   })

@@ -1,9 +1,14 @@
 import * as jwt from "jsonwebtoken";
-import { prisma } from "../server/db/client";
 
-type User = typeof prisma.user;
+type User = {
+    id: number,
+    name: string,
+    email: string,
+    password: string,
+    createdAt: Date,
+}
 
-export function getSignedToken(user: any) {
+export function getSignedToken(user: User) {
     return jwt.sign(
         getTokenPayload(user),
         process.env.JWT_SECRET!,
@@ -17,10 +22,10 @@ export function validateToken(token: string) {
     return jwt.verify(token, process.env.JWT_SECRET!) as jwt.JwtPayload & ReturnType<typeof getTokenPayload>
 }
 
-function getTokenPayload(user: any) {
+function getTokenPayload(user: User) {
     return {
         id: user.id,
-        username: user.username,
+        name: user.name,
         email: user.email,
     }
 }
