@@ -15,18 +15,20 @@ const PageShell = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
-      	<h1 className="bg-zinc-800 p-3 font-medium text-gray-50">
-	        Home page
-	      </h1>
-      </header>
+      <nav className="bg-zinc-800 p-3 font-medium text-zinc-50 sticky">
+      	<div className="m-auto w-7/12">
+	      	<h1 className="text-lg hover:text-emerald-200 cursor-pointer">
+		        Schooller
+		      </h1>
+	      </div>
+      </nav>
 
-      <main className="min-w-max min-h-screen bg-zinc-900 text-gray-50">
+      <main className="min-w-max min-h-screen bg-zinc-900 text-zinc-50">
         { children }
       </main>
 
-      <footer className="bg-zinc-800 p-1 text-gray-400 text-sm border-t-gray-700 border-t-2 flex justify-center">
-      	School management, 2022
+      <footer className="bg-zinc-900 p-3 text-zinc-400 text-sm flex justify-end pr-6">
+      	© 2022 Schooller
       </footer>
 
     </>
