@@ -20,6 +20,7 @@
     "@trpc/react": "^9.27.2",
     "@trpc/server": "^9.27.2",
     "bcryptjs": "^2.4.3",
+    "cookies": "^0.8.0",
     "jsonwebtoken": "^8.5.1",
     "next": "12.3.1",
     "react": "18.2.0",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/cookies": "^0.7.7",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
