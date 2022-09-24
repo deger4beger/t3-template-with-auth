@@ -1,7 +1,6 @@
 import * as jwt from "jsonwebtoken";
 import { User } from "../server/router/auth";
 
-
 export function getSignedToken(user: User) {
     return jwt.sign(
         getTokenPayload(user),
