@@ -25,7 +25,9 @@ export const createContextInner = async (opts: CreateContextOptions) => {
 export const createContext = async (
   opts: trpcNext.CreateNextContextOptions,
 ) => {
-  return await createContextInner({});
+  return await createContextInner({
+
+  });
 };
 
 type Context = trpc.inferAsyncReturnType<typeof createContext>;

@@ -3,14 +3,20 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
+}
+
+enum Role {
+    TEACHER
+    STUDENT
 }
 
 model User {
     id        Int      @default(autoincrement()) @id
     email     String   @unique
     name      String
+    role      Role
     password  String
     createdAt DateTime @default(now())
 }
