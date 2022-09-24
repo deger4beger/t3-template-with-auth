@@ -13,7 +13,7 @@ export const getUserFromToken = async (ctx: {
 
   const [scheme, token] = accessToken.split(/\s+/);
   if (scheme?.toLowerCase() !== "bearer" || !token) {
-    return null
+    return null;
   }
 
   let decodedToken: ReturnType<typeof validateToken>

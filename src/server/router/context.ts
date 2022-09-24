@@ -8,7 +8,7 @@ export const createContext = async (
   ctx: trpcNext.CreateNextContextOptions,
 ) => {
 
-  const user = await getUserFromToken(ctx)
+  const user = await getUserFromToken(ctx);
 
   return {
     user,
