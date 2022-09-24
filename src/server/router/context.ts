@@ -6,12 +6,12 @@ import { prisma } from "../db/client";
 type CreateContextOptions = Record<string, never>;
 
 export const createContext = async (
-  { req, res }: trpcNext.CreateNextContextOptions,
+  ctx: trpcNext.CreateNextContextOptions,
 ) => {
   return {
     prisma,
-    req,
-    res
+    req: ctx.req,
+    res: ctx.res
   }
 };
 
