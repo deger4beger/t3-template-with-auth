@@ -120,9 +120,11 @@ export const authRouter = createRouter()
     async resolve({ ctx }) {
       const cookies = new Cookies(ctx.req, ctx.res)
       const refreshToken = ctx.req.cookies["refresh"]
+
       if (!refreshToken) {
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
+
       try {
         const { id } = validateToken(refreshToken, true)
         await ctx.prisma.refreshToken.delete({ where: { userId: id } })
