@@ -11,8 +11,10 @@ export function getSignedToken(user: User, refresh=false) {
     );
 };
 
-export function validateToken(token: string) {
-    return jwt.verify(token, process.env.JWT_SECRET!) as jwt.JwtPayload & ReturnType<typeof getTokenPayload>;
+export function validateToken(token: string, refresh=false) {
+    return jwt.verify(
+        token, refresh ? process.env.JWT_REFRESH_SECRET! : process.env.JWT_ACCESS_SECRET!
+    ) as jwt.JwtPayload & ReturnType<typeof getTokenPayload>;
 };
 
 function getTokenPayload(user: User) {
