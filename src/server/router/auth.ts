@@ -86,7 +86,7 @@ export const authRouter = createRouter()
       };
     }
   })
-  .mutation("getAccessToken", {
+  .query("getAccessToken", {
     async resolve({ ctx }) {
       const refreshToken = ctx.req.cookies["refresh"]
       if (!refreshToken) {
