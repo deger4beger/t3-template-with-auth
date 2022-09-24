@@ -4,8 +4,6 @@ import * as trpcNext from "@trpc/server/adapters/next";
 import { authGuard } from "../common/auth-guard";
 import { prisma } from "../db/client";
 
-type CreateContextOptions = Record<string, never>;
-
 export const createContext = async (
   ctx: trpcNext.CreateNextContextOptions,
 ) => {
