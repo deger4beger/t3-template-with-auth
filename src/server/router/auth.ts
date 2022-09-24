@@ -1,7 +1,7 @@
 import { createRouter } from "./context";
 import { z } from "zod";
 import * as bcrypt from "bcryptjs";
-import { getSignedToken } from "../../utils/jwt";
+import { getSignedToken, validateToken } from "../../utils/jwt";
 import { TRPCError } from "@trpc/server";
 import Cookies from "cookies";
 
@@ -63,18 +63,48 @@ export const authRouter = createRouter()
         jwt: z.string()
       }),
     async resolve({ input, ctx }) {
+      const cookies = new Cookies(ctx.req, ctx.res)
+
       const user = await ctx.prisma.user.findUnique({ where: { email: input.email } });
       if (!user) {
         throw new TRPCError({ code: "NOT_FOUND" });
       }
+
       const passwordMatch = await bcrypt.compare(input.password, user.password);
       if (!passwordMatch) {
         throw new TRPCError({ code: "BAD_REQUEST" });
       }
       const { password, ...userOutput } = user
+
+      const refreshToken = getSignedToken(userOutput, true);
+      cookies.set("refresh", refreshToken, {
+        httpOnly: true, sameSite: true
+      })
       return {
         userData: userOutput,
         jwt: getSignedToken(userOutput)
       };
+    }
+  })
+  .mutation("getAccessToken", {
+    async resolve({ ctx }) {
+      const refreshToken = ctx.req.cookies["refresh"]
+      if (!refreshToken) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+      try {
+        const { id } = validateToken(refreshToken, true)
+        const user = await ctx.prisma.user.findUnique({ where: { id } })
+        if (!user) {
+          throw new TRPCError({ code: "NOT_FOUND" });
+        }
+        const { password, ...userOutput } = user
+        return {
+          userData: userOutput,
+          jwt: getSignedToken(userOutput)
+        }
+      } catch {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
     }
   })
