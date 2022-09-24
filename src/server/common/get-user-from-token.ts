@@ -2,7 +2,7 @@ import type { GetServerSidePropsContext } from "next";
 import { validateToken } from "../../utils/jwt";
 import { prisma } from "../db/client";
 
-export const authGuard = async (ctx: {
+export const getUserFromToken = async (ctx: {
   req: GetServerSidePropsContext["req"];
   res: GetServerSidePropsContext["res"];
 }) => {
