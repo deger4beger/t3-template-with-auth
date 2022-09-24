@@ -8,7 +8,7 @@ export const authGuard = async (ctx: {
 }) => {
   const accessToken = ctx.req.headers["authorization"];
   if (!accessToken) {
-    return;
+    return null;
   }
 
   const [scheme, token] = accessToken.split(/\s+/);
