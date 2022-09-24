@@ -1,7 +1,6 @@
 import { createRouter } from "./context";
 import { z } from "zod";
 import * as bcrypt from "bcryptjs";
-import * as jwt from "jsonwebtoken";
 import { getSignedToken } from "../../utils/jwt";
 import { TRPCError } from "@trpc/server";
 
@@ -34,10 +33,10 @@ export const authRouter = createRouter()
         ...input,
         password: await bcrypt.hash(input.password, 10)
       }
-      const { password, ...user } = await ctx.prisma.user.create({ data: userPayload });
+      const { password, ...userOutput } = await ctx.prisma.user.create({ data: userPayload });
       return {
-        userData: user,
-        jwt: getSignedToken(user)
+        userData: userOutput,
+        jwt: getSignedToken(userOutput)
       }
     },
   })
