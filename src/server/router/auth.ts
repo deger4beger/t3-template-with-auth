@@ -3,6 +3,7 @@ import { z } from "zod";
 import * as bcrypt from "bcryptjs";
 import { getSignedToken } from "../../utils/jwt";
 import { TRPCError } from "@trpc/server";
+import Cookies from "cookies";
 
 const userValidator = z.object({
   id: z.number(),
@@ -29,11 +30,21 @@ export const authRouter = createRouter()
         jwt: z.string()
       }),
     async resolve({ input, ctx }) {
+      const cookies = new Cookies(ctx.req, ctx.res)
       const userPayload = {
         ...input,
         password: await bcrypt.hash(input.password, 10)
       }
       const { password, ...userOutput } = await ctx.prisma.user.create({ data: userPayload });
+
+      const refreshToken = getSignedToken(userOutput, true);
+      await ctx.prisma.refreshToken.create({
+        data: { token: refreshToken, userId: userOutput.id }
+      });
+
+      cookies.set("refresh", refreshToken, {
+        httpOnly: true, sameSite: true
+      })
       return {
         userData: userOutput,
         jwt: getSignedToken(userOutput)
