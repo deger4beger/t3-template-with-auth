@@ -4,18 +4,15 @@ import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import { getSignedToken } from "../../utils/jwt";
 
-const userOutput = z.object({
-  userData: z.object({
-    id: z.string(),
-    email: z.string().email(),
-    name: z.string(),
-    role: z.enum(["STUDENT", "TEACHER"]),
-    createdAt: z.string(),
-  }),
-  jwt: z.string(),
-})
+const userValidator = z.object({
+  id: z.number(),
+  email: z.string().email(),
+  name: z.string(),
+  role: z.enum(["STUDENT", "TEACHER"]),
+  createdAt: z.date(),
+});
 
-export type User = z.infer<typeof userOutput>
+export type User = z.infer<typeof userValidator>;
 
 export const authRouter = createRouter()
   .query("signup", {
@@ -26,7 +23,11 @@ export const authRouter = createRouter()
         name: z.string().min(10).max(50),
         role: z.enum(["STUDENT", "TEACHER"]),
       }),
-    output: userOutput,
+    output: z
+      .object({
+        userData: userValidator,
+        jwt: z.string()
+      }),
     async resolve({ input, ctx }) {
       const userPayload = {
         ...input,
