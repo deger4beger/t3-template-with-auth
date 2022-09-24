@@ -77,6 +77,14 @@ export const authRouter = createRouter()
       const { password, ...userOutput } = user
 
       const refreshToken = getSignedToken(userOutput, true);
+      ctx.prisma.refreshToken.update({
+        where: {
+          userId: userOutput.id
+        },
+        data: {
+          token: refreshToken
+        }
+      })
       cookies.set("refresh", refreshToken, {
         httpOnly: true, sameSite: true
       })
@@ -103,6 +111,25 @@ export const authRouter = createRouter()
           userData: userOutput,
           jwt: getSignedToken(userOutput)
         }
+      } catch {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+    }
+  })
+  .mutation("signout", {
+    async resolve({ ctx }) {
+      const cookies = new Cookies(ctx.req, ctx.res)
+      const refreshToken = ctx.req.cookies["refresh"]
+      if (!refreshToken) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+      try {
+        const { id } = validateToken(refreshToken, true)
+        await ctx.prisma.refreshToken.delete({ where: { userId: id } })
+        cookies.set("refresh", "", {
+          httpOnly: true, sameSite: true
+        })
+        return true
       } catch {
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
