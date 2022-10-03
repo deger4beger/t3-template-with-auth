@@ -103,9 +103,11 @@ export const authRouter = createRouter()
       try {
         const { id } = validateToken(refreshToken, true)
         const user = await ctx.prisma.user.findUnique({ where: { id } })
+
         if (!user) {
           throw new TRPCError({ code: "NOT_FOUND" });
         }
+
         const { password, ...userOutput } = user
         return {
           userData: userOutput,
