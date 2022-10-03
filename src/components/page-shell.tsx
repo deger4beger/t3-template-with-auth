@@ -26,7 +26,7 @@ const PageShell = ({
       <nav className="bg-zinc-800 p-3 text-zinc-50">
       	<div className="m-auto w-7/12 flex">
 	      	<h1 className="text-lg cursor-pointer font-medium border-2 px-2 rounded hover:text-sky-300 hover:border-sky-300">
-		        Sch⊙ller
+		        ⊙il-gas
 		      </h1>
 		      <div className="flex">
 			      { routes.map(({ name, route }) =>
@@ -45,7 +45,7 @@ const PageShell = ({
       </main>
 
       <footer className="bg-zinc-900 p-3 text-zinc-400 text-sm flex justify-end pr-6">
-      	© 2022 Scholler
+      	© 2022 oil-gas
       </footer>
 
     </>
