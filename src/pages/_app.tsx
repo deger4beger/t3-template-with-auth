@@ -8,6 +8,23 @@ import type { AppRouter } from "../server/router";
 import "../styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+
+  // const [user, setUser] = useState(null)
+
+  // useEffect(() => {
+  //   *
+  //    * Here goes the logic of retrieving a user
+  //    * from the backend and redirecting
+  //    * an unauthorized user
+  //    * to the login page
+
+  //   setUser(result)
+  // }, [])
+
+  // if (pageProps.protected && !user) {
+  //   return <div>Loading...</div>
+  // }
+
   return <Component {...pageProps} />;
 };
 
