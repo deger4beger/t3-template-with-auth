@@ -1,10 +1,11 @@
 import React from "react"
+import PageShell from "../components/page-shell"
 
 const Auth = () => {
 	return (
-		<div>
-			Auth page
-		</div>
+		<PageShell title="Авторизация">
+			Авторизация
+		</PageShell>
 	)
 }
 

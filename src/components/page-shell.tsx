@@ -41,7 +41,9 @@ const PageShell = ({
       </nav>
 
       <main className="min-w-max min-h-screen bg-zinc-900 text-zinc-50">
-        { children }
+      	<div className="m-auto w-7/12">
+        	{ children }
+        </div>
       </main>
 
       <footer className="bg-zinc-900 p-3 text-zinc-400 text-sm flex justify-end pr-6">
