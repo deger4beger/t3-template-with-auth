@@ -12,12 +12,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   // const [user, setUser] = useState(null)
 
   // useEffect(() => {
-  //   *
-  //    * Here goes the logic of retrieving a user
-  //    * from the backend and redirecting
-  //    * an unauthorized user
-  //    * to the login page
-
+      // retrieve user from backend
   //   setUser(result)
   // }, [])
 
